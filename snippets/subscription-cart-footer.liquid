@@ -1,0 +1,202 @@
+{% comment %}
+    to install, insert:
+    {% include 'subscription-cart-footer' %} 
+    at the bottom of cart.liquid page 
+{% endcomment %}
+
+<script>
+    rechargedebug={}
+	rechargedebug['subscription_active_metafield'] = '{{shop.metafields.subscriptions.subscription_active}}'
+	rechargedebug['subscription_on']=false
+	
+	subscription_on=false
+    {% if shop.metafields.subscriptions.subscription_active == 'true'  %}
+        subscription_on=true
+        rechargedebug['subscription_on']=subscription_on
+    {% endif %}
+</script>
+
+<script>
+try {
+	function readCookie(name) {
+		var nameEQ = name + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0;i < ca.length;i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1,c.length);
+			if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+		}
+		return null;
+	}
+		
+	
+	//alternatively, activate with preview
+	if ( subscription_on==true || readCookie('recharge')!=undefined ) {
+		subscription_on=true 
+    } 
+    
+    if (readCookie('recharge')=='true') { 
+        rechargedebug['previewactive']='true' 
+    } else {
+        rechargedebug['previewactive']='not active'
+    }
+}
+catch (e) {
+	//nothing
+}
+
+
+if (subscription_on==true) {
+    /*make sure we have jquery available */
+    var source = '//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';
+    
+    if(window.jQuery){
+      var arr = $.fn.jquery.split('.');
+    }
+    if (!window.jQuery || arr[0] > 1 || (arr[0] == 1 && arr[1] < 7)) {
+        //console.log('jquery not found or not up to date, installing jquery 1.7.1');
+        document.write('<script src="'+source+'"></scr'+'ipt>');
+    }
+                
+    function checkIfCartHasCustomItems() {
+        cart_info = {{cart | json }}
+        var has_autorenew = false
+        for (i=0;i<cart_info.items.length;i++) {
+            if(cart_info.items[i].properties != null ) {
+                if(cart_info.items[i].properties.shipping_interval_frequency != null) {
+                    window.has_autorenew=true
+                    setCustomCheckoutListener()
+                }
+            }
+        }
+    } //end checkCart
+
+   checkIfCartHasCustomItems()
+      
+      function saveCartNoteThenRedirect() {
+        try {
+            data={}
+            if($('[name="attributes[local_delivery_request]"]').val() != undefined) {
+                data['attributes[local_delivery_request]']= $('[name="attributes[local_delivery_request]"]').val()
+                has_cart_note_or_attribute= true
+            }   
+            if($('[name="note"]').val() != undefined){
+                data['note'] = $('[name="note"]').val();
+                has_cart_note_or_attribute= true
+            }
+            
+            if (has_cart_note_or_attribute) {
+                jQuery.ajax({
+                    type: 'POST',
+                    data: data,
+                    url: '/cart/update.js',
+                    dataType: 'json',
+                    success: function() { 
+                      redirectToCustomCheckout()
+                    }
+                }); 
+            } else {
+                redirectToCustomCheckout()
+            }
+        } catch (e) {
+            redirectToCustomCheckout()
+        } //endtrycatch
+    
+      }//end saveCartNoteThenRedirect
+    
+      function setCustomCheckoutListener() {
+        checkout_buttons = $("[name='checkout']");
+        $('.extra-checkout-buttons, .additional-checkout-buttons, #additional-checkout-buttons').hide()
+        
+        checkout_buttons.click(function(event) {
+          event.preventDefault();
+          saveCartNoteThenRedirect()
+        });
+    
+        /*
+            //this is used sometimes    
+            form = $("form[action='/cart']");
+            form.submit(function () {
+                return false;
+            });
+        */
+       
+      }
+      
+      function redirectToCustomCheckout() {
+            function get_cookie(k){return(document.cookie.match('(^|; )'+k+'=([^;]*)')||0)[2]}
+            token=get_cookie('cart')
+            var myshopify_domain='theroasterspack.myshopify.com'
+            var subscription_id='2168'
+            checkout_url="https://checkout.rechargeapps.com/r/checkout?myshopify_domain="+myshopify_domain+"&cart_token="+token+"&subscription_id="+subscription_id;
+            window.location.href= checkout_url;
+    
+      }
+      
+     $(document).ready(function() { 
+        if(window.has_autorenew == true ) {
+            $('.extra-checkout-buttons, .additional-checkout-buttons, #additional-checkout-buttons').hide()
+        }
+     });
+     
+    
+    /* 
+        replaces non-existent url of hidden product with real non-hidden product url
+    */
+    
+    /* load cart_items with all line items */
+      var cart_items = [];  
+      {% for item in cart.items %}
+          var single_item = {};
+          single_item.item_name = "{{ item.product.title }}";
+          single_item.item_quantity = "{{ item.quantity }}";
+          single_item.item_price = "{{ item.line_price | money }}";
+          single_item.product_meta_fields = {
+            {% for metafield in item.product.metafields.subscriptions %}
+            "{{metafield.first}}":"{{metafield.last}}",
+            {% endfor %}
+          };
+          single_item.variant_meta_fields = {
+            {% for variant in item.product.variants %}
+            "variant{{forloop.index}}":{
+            "id": {{variant.id}},
+            {% for metafield in variant.metafields.subscriptions %}
+            "{{metafield.first}}":"{{metafield.last}}",
+            {% endfor %}  				
+          },
+            {% endfor %}
+          };
+          single_item.properties = {
+            {% for property in item.properties %}
+            "{{ property.first }}":"{{ property.last }}",
+            {% endfor %}
+          };
+          cart_items.push(single_item);
+      {% endfor %}
+    
+    
+    /** loop through cart_items and find items that correspond to an original product **/
+    
+      var new_item_mapping = [];
+      {% for item in cart.items %}
+          var new_item_cart = {};
+          {% if item.product.metafields.subscriptions.original_handle %}
+            new_item_cart.item_handle = "{{item.product.url}}";
+                new_item_cart.item_handle_original = "{{item.product.metafields.subscriptions.original_handle }}";
+                new_item_mapping.push(new_item_cart);
+          {% endif %}        
+      {% endfor %}
+    
+    /** replace the urls **/
+      for(item in new_item_mapping){
+        var item_handle = new_item_mapping[item].item_handle;
+        var item_handle_original = new_item_mapping[item].item_handle_original;
+        var items_to_check = $('a[href*="'+item_handle+'"]')
+        items_to_check.each(function(){
+          $(this).attr('href',"products/"+item_handle_original);      
+        })
+      }
+    
+}//end big if statement
+</script>
+

@@ -1,0 +1,35 @@
+<div class="sixteen columns linedbackground spacer24 marginbottom16"></div>
+<div class="sixteen columns marginbottom24">
+    <div class="nine columns alpha">
+        <h1 style="font-size: 1.6em; margin: 0px auto 9px;" itemprop="name">{{ product.title }}</h1>
+    </div>
+    <div class="seven columns omega">
+        <ul class="social-buttons">
+            <li><a class="facebook-button" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://theroasterspack.com/pages/subscribe-to-the-roasters-pack"><i class="fa fa-facebook"></i> Facebook</a>
+            </li>
+            <li><a class="twitter-button" target="_blank" href="https://twitter.com/intent/tweet?text=Discover Three New Coffees Every Month. Subscribe to The Roasters Pack&amp;url=http://bit.ly/1xmiXOl"><i class="fa fa-twitter"></i> Twitter</a>
+            </li>
+            <li><a class="google-plus-button" target="_blank" href="https://plus.google.com/share?url=http://theroasterspack.com/pages/subscribe-to-the-roasters-pack"><i class="fa fa-google-plus"></i> Google+</a>
+            </li>
+        </ul>
+  </div>
+</div>
+{% include 'in-every-issue' %}
+<div class="sixteen columns">
+    <div class="ten columns alpha" id="product-{{ product.id }}">
+        {% include 'product-form' %}
+    </div>
+    <div class="six columns omega">
+        {% include 'next-delivery' %}
+    </div>
+</div>
+<div class="sixteen columns">
+    {% include 'gift-coffee-combo' %}
+</div>
+    <hr>
+<div class="sixteen columns">
+    {% include 'some-fans-of-ours' %}
+</div> 
+<div class="sixteen columns">
+    {% include 'faq-gifts' %}
+</div>

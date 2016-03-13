@@ -1,0 +1,116 @@
+/* CUSTOMIZATION APP */
+
+.coffee-quiz {
+    padding: 40px 10px 20px;
+    text-align: center;
+}
+
+.quiz-controls {
+    margin: 20px auto;
+}
+
+.selection {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.button-style {
+    flex: 1 0 300px;
+    margin:2px;
+}
+
+.button-style img {
+    display: block;
+    margin: 0 auto 10px;
+}
+
+.button-style:hover {
+    cursor: pointer;
+}
+
+.button-style label {
+  margin-bottom:0;
+}
+
+input[type="radio"] {
+  opacity:0;
+  float:left;
+    border-radius:2px;
+    font-size: 1.3em;
+}
+
+input[type="radio"] + label, .issue {
+  padding: 10px 10px 10px 10px;
+  border-radius:2px;
+  background: #252016;
+  border:4px solid #252016;
+  color:white;
+}
+
+input[type="radio"]:checked + label, .issue:hover {
+  background-color: #F4F3F1;
+  color: #423030;
+}
+
+input[type="radio"] + label:hover, input[name="subid"]:hover {
+    background-color: #F4F3F1;
+    cursor: pointer;
+    border:4px solid #252016;
+    box-sizing:border-box;
+    color:#252016;
+}
+
+#customizeapp h2, #customizeapp h3, #customizeapp h4, #customizeapp h5, #customizeapp h6, #customizeapp p {
+  text-align:center;
+}
+
+
+#controls {
+  text-align:center;
+}
+
+.question-num {
+  margin:4px 0 0;
+  font-weight:600;
+  clear:both;
+}
+
+button.disabled, button.disabled:hover {
+  background:#585858;
+}
+
+#quiz-results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+li.result-box {
+    list-style-type: none;
+    font-size: 1.2em;
+    border-radius: 2px;
+    margin: 2px;
+    line-height: 1.4em;
+    padding: 10px 32px;
+    flex: 1 1 auto;
+}
+.result-box span {
+    display: block;
+    width: 100%;
+    text-transform: uppercase;
+    background-color: #fff;
+    border: 4px solid #252016;
+    min-height: 26px;
+    border-radius: 2px;
+}
+
+#quizform input[type="submit"] {
+    width: 100%;
+    max-width: 325px;
+}
+
+.quiz-controls button {
+    margin: 4px 0;
+}

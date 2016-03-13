@@ -1,0 +1,139 @@
+<div class="coffee-quiz">
+	<div id="bingo-bar"></div>
+	<div class="question-num"></div>
+	<form id="quizform" action="">
+		<div class="question" id="qtype">
+			<h2>What kind of coffee do you mainly want to drink</h2>
+			<p>Some roasts work better as espresso, others as filter coffee.</p>
+			{{ 'trp-coffee-quiz-01-type.gif' | asset_url | img_tag: 'Espresso or Drip?'}}
+			<div class="selection">
+				<div class="button-style">
+					<input type="radio" name="type" value="espresso"><label for="espresso">MOSTLY ESPRESSO</label>
+				</div>
+				<div class="button-style">
+					<input type="radio" name="type" value="filter"><label for="filter">MOSTLY FILTER</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="question" id="qfruit">
+			<h2>Do you like fruit forward coffee?</h2>
+			<p>Fruity notes are central to these coffees. For example an Ethiopian coffee with tasting notes of <b>Orange</b>, <b>Cherry</b> &amp; <b>Peach</b>. Or perhaps a Kenyan with <b>Stone Fruit</b> &amp; <b>Stewed Plum</b> notes &amp; a <b>cola</b> sweetness.</p>
+			{{ 'trp-coffee-quiz-01-fruity.gif' | asset_url | img_tag: 'Fruity'}}
+			<div class="selection">
+				<div class="button-style">
+					<input type="radio" name="fruit" value="yes"><label for="yes"><i class="fa fa-check"></i> SOUNDS GOOD</label>
+				</div>
+				<div class="button-style">
+					<input type="radio" name="fruit" value="no"><label for="no"><i class="fa fa-times"></i> NO THANKS</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="question" id="qfamiliar">
+			<h2>Do you like familiar tasting coffee?</h2>
+			<p>Smooth, balanced, rich &amp; familiar. The classic tasting coffee. Like this Guatemalan with <b>Hazelnut</b>, <b>Brown Sugar</b> &amp; <b>Cherry Wood</b> notes. Or this Colombian with notes of <b>Muscovado Sugar</b>, <b>Cinnamon</b> &amp; <b>Chicory</b>.  </p>
+			{{ 'trp-coffee-quiz-01-familiar.gif' | asset_url | img_tag: 'Familiar'}}
+			<div class="selection">
+				<div class="button-style">
+					<input type="radio" name="familiar" value="yes"><label for="yes"><i class="fa fa-check"></i> SOUNDS GOOD</label>
+				</div>
+				<div class="button-style">
+					<input type="radio" name="familiar" value="no"><label for="no"><i class="fa fa-times"></i> NO THANKS</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="question" id="qbetween">
+			<h2>Do you like roasts that are in between?</h2>
+			<p>Equal parts fruity notes &amp; equal parts classic notes. Interesting acidity and exceptionally balanced. Like this Bolivian with notes of <b>Chocolate</b>, <b>Stone Fruit</b> &amp; <b>Caramel</b>. Or this Peruvian with notes of <b>Raisins</b>, <b>Chocolate Chip Cookie</b> &amp; <b>Black Cherry</b>.</p>
+			{{ 'trp-coffee-quiz-01-between.gif' | asset_url | img_tag: 'In Between'}}
+			<div class="selection">
+				<div class="button-style">
+					<input type="radio" name="between" value="yes"><label for="yes"><i class="fa fa-check"></i> SOUNDS GOOD</label>
+				</div>
+				<div class="button-style">
+					<input type="radio" name="between" value="no"><label for="no"><i class="fa fa-times"></i> NO THANKS</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="question" id="qdark">
+			<h2>Do you like dark roasts?</h2>
+			<p>Bold, intense &amp; roasty. Like this blend with notes of <b>Dark Chocolate</b> &amp; <b>Molasses</b>. Or this blend with a <b>smoky</b>, <b>powerful</b> and <b>nutty</b> taste profile.</p>
+			{{ 'trp-coffee-quiz-01-adventurous.gif' | asset_url | img_tag: 'Adventurous'}}
+			<div class="selection">
+				<div class="button-style">
+					<input type="radio" name="dark" value="yes"><label for="yes"><i class="fa fa-check"></i> SOUNDS GOOD</label>
+				</div>
+				<div class="button-style">
+					<input type="radio" name="dark" value="no"><label for="no"><i class="fa fa-times"></i> NO THANKS</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="question" id="qadventure">
+			<h2>Do you want to try some adventurous flavours?</h2>
+			<p>An unusual yet interesting cup of joe that’ll take you on a rollercoaster ride in the morning. Like this Mexican coffee with notes of <b>Cherry</b>, <b>Chocolate</b> &amp; <b>Bacon</b>. Or this creamy Kenyan with notes of <b>Brown Sugar</b>, <b>Jujube Fruit</b> &amp; <b>Eucalyptus Tea</b></p>
+			{{ 'trp-coffee-quiz-01-adventurous.gif' | asset_url | img_tag: 'Adventurous'}}
+			<div class="selection">
+				<div class="button-style">
+					<input type="radio" name="adventure" value="yes"><label for="yes"><i class="fa fa-check"></i> SOUNDS GOOD</label>
+				</div>
+				<div class="button-style">
+					<input type="radio" name="adventure" value="no"><label for="no"><i class="fa fa-times"></i> NO THANKS</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="question" id="qcomments">
+			<h2>Leave us a comment to help us pick the right coffee for you!</h2>
+			<p>Tart apple pie lemon drops cheesecake. Tootsie roll cake pastry pudding jelly-o candy canes. Fruitcake jujubes cupcake dragée lemon drops ice cream. Macaroon bonbon pastry danish.</p>
+			<div class="selection">
+					<textarea cols="20" rows="4" name="comments" placeholder="Leave a comment here"></textarea>
+			</div>
+		</div>		
+
+		<div class="question" id="qsublength">
+			<h2>How many issues would you like?</h2>
+			<p>Longer subscriptions are a better value, but you! We send one issue per month.</p>
+			<div class="selection">
+				<div class="button-style issue">
+					<input type="radio" name="subid" value="one">ONE ISSUE
+				</div>
+				<div class="button-style issue">
+					<input type="radio" name="subid" value="three">THREE ISSUES
+				</div>
+				<div class="button-style issue">
+					<input type="radio" name="subid" value="six">SIX ISSUES
+				</div>
+				<div class="button-style issue"> 
+					<input type="radio" name="subid" value="twelve">TWELVE ISSUES
+				</div>
+			</div>
+		</div>	
+
+		<div class="question" id="qconfirm">
+			<h2>We're All Set!</h2>
+			<p>Review your quiz results and add it to your cart!</p>
+
+			<ul id="quiz-results">
+				<li class="result-box kind">Type of Coffee?<br><span></span></li>
+				<li class="result-box fruit">Fruit Coffees?<br><span></span></li>
+				<li class="result-box familiar">Familiar Coffees?<br><span></span></li>
+				<li class="result-box between">In between?<br><span></span></li>
+				<li class="result-box dark">Dark Coffees?<br><span></span></li>
+				<li class="result-box adventure">Adventurous Flavours?<br><span></span></li>
+				<li class="result-box subscription_choice"># Of Issues<br><span></span></li>
+				<li class="result-box comments">Your Comments:<br><span></span></li>
+			</ul>
+			<input type="submit" value="ADD TO CART">
+		</div>
+
+		<div class="quiz-controls">
+			<button id="next" type="button">NEXT</button>
+			<button id="back" type="button">BACK</button>
+			<button id="restart" type="button">START OVER</button>
+		</div>
+	</form>
+</div>

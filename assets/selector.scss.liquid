@@ -1,0 +1,110 @@
+$linesbrown : url(" {{ 'bg_stripes.png' | asset_url }} ");
+  
+$wholebean : url(" {{ 'icon-bean-white.png' | asset_url }} ");
+$coarse : url(" {{ 'icon-french-white.png' | asset_url }} ");
+$medium : url(" {{ 'icon-filter-white.png' | asset_url }} ");
+$fine : url(" {{ 'icon-aeropress-white.png' | asset_url }} ");
+$xfine : url(" {{ 'icon-espresso-white.png' | asset_url }} ");
+
+  
+@mixin innershading() {
+-webkit-box-shadow: inset 0px 0px 3px 1px rgba(37,32,22,0.4);
+-moz-box-shadow: inset 0px 0px 3px 1px rgba(37,32,22,0.4);
+box-shadow: inset 0px 0px 3px 1px rgba(37,32,22,0.4);
+  }
+
+.offer-box {
+  
+  text-align:center;
+  margin:0 0 20px;
+
+  h1,h2,h3,h4,h5,h6 {
+  text-align:center;
+  }
+  
+  h2 {
+    font-size:2em;
+    margin:10px 0 5px;
+    }
+
+  .subscription-button {
+    color:white;
+  }
+}   
+
+div.period, div.grind, div.size, {
+    text-align:center;
+    h3, p {
+      color:white;
+      margin:0;
+      text-align:left;
+    }
+    .oz {
+      font-size:50%;
+      text-align:left;
+    }
+}
+
+.subscription-button, .subscription-button:hover {
+  padding: 14px 15px;
+  margin-bottom: 14px!important;
+  background-repeat:no-repeat;
+  background-position: right 15px center;
+  background-size:48px;
+  box-sizing:border-box;
+  cursor:pointer;
+}
+
+.whole-bean {
+    background-image: $wholebean;
+}
+.coarse {
+    background-image: $coarse;
+}
+.medium {
+    background-image: $medium;
+}
+.fine {
+    background-image: $fine;
+}
+.xfine {
+    background-image: $xfine;
+}
+
+
+div.grind {
+
+  p {
+    margin-bottom:0;
+  }
+}
+
+div.period, div.size {
+  h3, p {
+    margin-bottom:0;
+  }
+}
+
+.lines {
+  background-image:$linesbrown;
+  height:20px;
+}
+
+
+.timerbox {
+  border: double 6px #281919;
+  border-radius: 4px;
+  /* height: 185px; */
+  padding: 26px 0px;
+}
+
+
+.confirm-restart {
+  cursor: pointer;
+  display:inline-block;
+  margin:auto;
+  text-decoration: underline;
+  &:hover {
+    text-decoration:none;
+  }
+}

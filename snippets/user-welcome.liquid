@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="sixteen columns welcome-bar">
+    {% if shop.customer_accounts_enabled %}
+  	<!-- If not logged in -->
+  	{% if customer %}
+		{{ 'Log in' | customer_login_link }}
+		{% else %}
+	  <!-- If logged in -->
+  	<span class="message">Welcome back, <a href="/account"><i class="fa fa-user"></i> {{ customer.first_name }}</a>!</span> <span class="logout">{{ 'Log Out' | customer_logout_link }}</span>
+  	{% endif %}
+  	{% endif %}
+  </div>
+</div>

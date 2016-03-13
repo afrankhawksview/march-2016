@@ -1,0 +1,175 @@
+<div class="container">
+  <div class="sixteen columns spacer48 linedbackground">
+  </div>
+  <div class="sixteen columns" itemscope itemtype="http://data-vocabulary.org/Product" id="product-{{ product.id }}">
+
+      <div class="eight columns alpha margintop24">
+
+      <h1 style="line-height: 1.1em;">Gift Three New Roasts Every Month</h1>
+      {% include 'product-notify-me' %}
+
+      {% include 'product-form' %}
+      
+
+       
+     
+       <div class="meta">
+         
+
+         
+       
+       <!--
+         {% if settings.display_tags %}
+            <p>
+              {% for tag in product.tags %}
+                {% if forloop.first %}
+                  <span class="label">Category:</span> 
+                {% endif %}
+
+                {% unless tag contains 'meta-related-collection-' %}
+                  <span>
+                      <a href="/collections/{% if collection %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handle }}" title="Products tagged {{ tag | escape}}">{{ tag }}</a>
+                  </span>
+                {% endunless %} 
+              {% endfor %}
+            </p>
+         {% endif %} -->
+       
+       <!-- {% if settings.display_type %}
+           <p>
+             <span class="label">Type:</span> <span itemprop="category">{{ product.type | link_to_type }}</span>
+           </p>
+        {% endif %} -->
+       
+        {% if settings.display_vendor %}
+           <p>
+             <span class="label">Vendor:</span> <span itemprop="brand">{{ product.vendor | link_to_vendor }}</span>
+           </p>
+        {% endif %}
+       </div>
+
+       {% include "social-buttons" with "product" %}     
+    </div>
+      
+      <div class="eight columns omega center">
+        <div class="timer">
+          <div class="timer-desc">
+            <h2 class="center">Next Delivery in:</h2>
+          	<p style="display: inline-block; width: 80px;">Days</p>
+          	<p style="display: inline-block; width: 80px;">Hours</p>
+          	<p style="display: inline-block; width: 80px;">Minutes</p>
+          </div>
+          <div id="new_year"></div>
+        </div>
+     <p><strong class="redorange">Free Shipping across Canada &amp; the United States.</strong></p><p>All prices in Canadian currency. </p>
+      </div>
+
+
+</div>
+</div>
+
+    <div class="container">
+        <div class="sixteen columns pricing-chart margintop24">  
+          <div class="four columns alpha">
+                <div class="four columns spacer48 linedbackground alpha omega clearfix">
+                </div>
+                <div class="four columns alpha omega clearfix">
+              <h2 style="margin-bottom:-0.25em;">One Month</h2>
+              <h4>$29.95/Month</h4> 
+              </div>
+              </div>
+          <div class="four columns">
+                <div class="four columns spacer48 linedbackground alpha omega clearfix">
+                </div>
+                <div class="four columns alpha omega clearfix">
+              <h2 style="margin-bottom:-0.25em;">Three Months</h2>
+              <h4>$28.95/Month</h4>
+              </div>
+              </div>
+          <div class="four columns">
+                <div class="four columns spacer48 linedbackground alpha omega clearfix">
+                </div>
+                <div class="four columns alpha omega clearfix">
+              <h2 style="margin-bottom:-0.25em;">Six Months</h2>
+              <h4>$27.95/Month</h4>
+              </div>
+              </div>
+          <div class="four columns omega">
+                <div class="four columns spacer48 linedbackground alpha omega">
+                </div>
+                <div class="four columns alpha omega clearfix">
+              <h2 style="margin-bottom:-0.25em;">Twelve Months</h2>
+              <h4>$26.95/Month</h4>
+              </div>
+              </div>
+              
+              
+             <!-- <form method="post" class="clearfix product_form" data-money-format="{{ shop.money_format }}" data-option-index="{{ option_index }}" id="product-form-{{ product.id }}">>
+                  <select>
+                    <option value="One Month">One Month</option>
+                  </select>
+                  <select></select>
+              <a class="button" href="#">Subscribe</a>
+              </form> -->
+              
+        </div>
+
+
+
+      <div class="description" itemprop="description">
+    	 {{ product.description }}
+   	  </div>
+        
+    </div>
+</div>
+</div>
+        <div class="brown-bg margintop24">
+        <div class="container">
+            <div class="sixteen columns center">
+            <img class="margintop24" src="http://cdn.shopify.com/s/files/1/0330/7333/files/img_free-cone-1.png?2717"/>
+            <h5 class="white">Gift a twelve month subscription today and we'll add in a <a href="/products/buy-hario-v60-clear-coffee-dripper" target="_blank">HARIO V60 CLEAR COFFEE DRIPPER</a> FREE!</h5>
+        </div>
+        </div>   
+        </div>    
+    </div>
+    
+  </div>
+  
+  </div>
+ 
+   
+  
+</div>
+
+{% if settings.display_related_products %}
+  {% capture limit %}{{ settings.products_per_row | plus: 1 }}{% endcapture %}
+
+  {% if collection and collection.all_products_count > 1 %}
+    {% assign col = collection.handle %}
+  {% else %}
+    {% assign col = product.collections.last.handle %}
+  {% endif %}
+
+  {% for tag in product.tags %}
+    {% if tag contains 'meta-related-collection-' %}
+      {% assign col = tag | remove: 'meta-related-collection-' %}
+      {% assign collection = collections[col] %}
+      {% capture limit %}{{ collection.products_count | plus: 1 }}{% endcapture %}
+    {% endif %}
+  {% endfor %}
+    
+  {% if col and collections[col].all_products_count > 0 %}
+    <div class="sixteen columns">
+      <h2>{{ settings.related_products_title }}</h2>
+    </div>
+
+    {% assign skip_product = product %}
+    {% assign products = collections[col].products %}
+    {% assign products_per_row = settings.products_per_row %}
+    <div class="sixteen columns">
+      {% include 'product-loop' %}
+    </div>
+  {% endif %}
+  
+{% endif %}
+</div>

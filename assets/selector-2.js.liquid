@@ -1,0 +1,27 @@
+$(document).ready(function() {
+
+  var selection = {};
+  
+  selection.cartId = 234235;
+
+  $('.size').click(function(x) {
+    selection.size = $(this).data('size');
+  });
+
+  $('.issue').click(function(x) {
+    selection.issue = $(this).data('issue');
+  });
+
+  $('#selector .button').click(function() {
+    $(this).parent().hide();
+    $(this).parent().next().show();
+    $('#selection').html(
+      '<ul>' +
+      '<li>Size: ' + selection.size + '</li>' +
+      '<li>Issues: ' + selection.issue + '</li>' +
+      '</ul>' +
+      '<a id="cartAdd" class="button" data-cartID="' + selection.cartId + '">Add to Cart</a>'
+    );
+  })
+
+});
